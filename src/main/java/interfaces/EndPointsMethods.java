@@ -7,7 +7,7 @@ import types.User;
  */
 public interface EndPointsMethods {
 
-    public void addUser(User user);
+    public String addUser(User user);
 
     public String listUsers();
 
