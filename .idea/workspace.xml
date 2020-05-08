@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b2d80951-a4e9-4f32-b6fd-832a873b44ce" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/es2-management-app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/es2-management-app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/authentication/Authentication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/authentication/RegisteredUser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/Resource.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/Resources.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/users/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/users/Users.java" beforeDir="false" />
-    </list>
+    <list default="true" id="b2d80951-a4e9-4f32-b6fd-832a873b44ce" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
