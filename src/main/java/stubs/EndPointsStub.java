@@ -15,6 +15,33 @@ public class EndPointsStub implements EndPointsMethods {
     private ArrayList<User> users = new ArrayList<User>();
     private ArrayList<Resource> resources = new ArrayList<Resource>();
 
+    public EndPointsStub() {
+        this.defaultUsers();
+        this.defaultResources();
+    }
+
+    private void defaultUsers() {
+        // Classes instances
+        final User user0 = new User(2, "xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "Falcao", "TiagovskiCoolXxX6969");
+        final User user1 = new User(3, "xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "Falcao", "MariaLealFanboyXxX6969");
+        final User user2 = new User(4, "xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "Falcao", "MinecraftGajasEAlcoolXxX6969");
+
+        // Adding the users
+        users.add(user0);
+        users.add(user1);
+        users.add(user2);
+    }
+
+    private void defaultResources() {
+        final Resource resource1 = new Resource(1, "xX69FalcaoZinhoGamer69Xx@outlook.pt",  1997, "Yellow", "lol123");
+        final Resource resource2 = new Resource(2, "xX69FalcaoZinhoGamer69Xx@outlook.pt",  1997, "Yellow", "lol123");
+        final Resource resource3 = new Resource(3, "xX69FalcaoZinhoGamer69Xx@outlook.pt",  1997, "Yellow", "lol123");
+
+        this.resources.add(resource1);
+        this.resources.add(resource2);
+        this.resources.add(resource3);
+    }
+
     public String addUser(User user) {
         JSONObject finalObject = new JSONObject();
 
@@ -47,6 +74,7 @@ public class EndPointsStub implements EndPointsMethods {
             jsonObject.put("Last_Name", user.getLastName());
             jsonObject.put("Avatar", user.getAvatar());
             jsonArray.add(jsonObject);
+
         }
 
         // Create final response object
@@ -95,6 +123,7 @@ public class EndPointsStub implements EndPointsMethods {
             jsonObject.put("Year", resource.getYear());
             jsonObject.put("Color", resource.getColor());
             jsonObject.put("PantoneValue", resource.getPantoneValue());
+            jsonArray.add(jsonObject);
         }
 
         // Create final response object
