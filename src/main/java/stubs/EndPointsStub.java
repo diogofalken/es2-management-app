@@ -46,6 +46,7 @@ public class EndPointsStub implements EndPointsMethods {
             jsonObject.put("First_Name", user.getFirstName());
             jsonObject.put("Last_Name", user.getLastName());
             jsonObject.put("Avatar", user.getAvatar());
+            jsonArray.add(jsonObject);
         }
 
         // Create final response object
