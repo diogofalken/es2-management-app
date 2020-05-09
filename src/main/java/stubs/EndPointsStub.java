@@ -16,7 +16,7 @@ public class EndPointsStub implements EndPointsMethods {
     private ArrayList<Resource> resources = new ArrayList<Resource>();
 
     public String addUser(User user) {
-        JSON finalObject = new JSONObject();
+        JSONObject finalObject = new JSONObject();
 
         this.users.add(user);
 
@@ -57,9 +57,8 @@ public class EndPointsStub implements EndPointsMethods {
 
     public String singleUser(int _id) {
         int flag = 0;
-        JSONObject jsonObject = new JSONObject();       
+        JSONObject jsonObject = new JSONObject();
         JSONObject finalObject = new JSONObject();
-
 
         for (User user : this.users) {
             if (user.getId() == _id) {
@@ -73,11 +72,10 @@ public class EndPointsStub implements EndPointsMethods {
         }
 
         // Create final response object
-        if(flag == 0) {
+        if (flag == 0) {
             finalObject.put("status", 404);
             finalObject.put("data", jsonObject);
-        }
-        else {
+        } else {
             finalObject.put("status", 200);
             finalObject.put("data", jsonObject);
         }
@@ -87,7 +85,7 @@ public class EndPointsStub implements EndPointsMethods {
 
     public String listResources() {
         JSONArray jsonArray = new JSONArray();
-        JSONArray finalObject = new JSONObject();
+        JSONObject finalObject = new JSONObject();
 
         for (Resource resource : this.resources) {
             JSONObject jsonObject = new JSONObject();
@@ -98,7 +96,7 @@ public class EndPointsStub implements EndPointsMethods {
             jsonObject.put("PantoneValue", resource.getPantoneValue());
         }
 
-         // Create final response object
+        // Create final response object
         finalObject.put("status", 200);
         finalObject.put("data", jsonArray);
 
@@ -122,11 +120,10 @@ public class EndPointsStub implements EndPointsMethods {
         }
 
         // Create final response object
-        if(flag == 0) {
+        if (flag == 0) {
             finalObject.put("status", 404);
             finalObject.put("data", jsonObject);
-        }
-        else {
+        } else {
             finalObject.put("status", 200);
             finalObject.put("data", jsonObject);
         }
