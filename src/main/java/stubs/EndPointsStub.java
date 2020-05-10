@@ -284,7 +284,7 @@ public class EndPointsStub implements EndPointsMethods {
 
         for (User user : this.users) {
             if (user.getId() == _id) {
-                this.users.remove(_id);
+                this.users.remove(user.getId());
             }
         }
 

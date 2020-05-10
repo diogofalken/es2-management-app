@@ -1,10 +1,10 @@
 // Test Imports
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 // Types/Classes imports
+import org.junit.jupiter.api.Test;
 import stubs.EndPointsStub;
 import types.Resource;
 import types.User;
@@ -368,13 +368,53 @@ public class EndPointsStubTests {
     }
 
     @Test
-    public String deleteUser_Status204() {
-        return "";
+    public void deleteUser_Status204() {
+        // Delete user and get response
+        String response = new EndPointsStub().deleteUser(10);
+
+        // Create the expected output
+        JSONObject finalObject = new JSONObject();
+        finalObject.put("status", 204);
+
+        assertEquals(finalObject.toJSONString(), response);
     }
 
     @Test
-    public String listUsersDelayed_Status200AllUsers() {
-        return "";
+    public void listUsersDelayed_Status200AllUsers() throws InterruptedException {
+        ArrayList<User> users = new ArrayList<User>();
+
+        // User instances
+        final User user0 = new User(2, "xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "Falcao", "TiagovskiCoolXxX6969");
+        final User user1 = new User(3, "xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "Falcao", "MariaLealFanboyXxX6969");
+        final User user2 = new User(4, "xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "Falcao", "MinecraftGajasEAlcoolXxX6969");
+
+        // Adding the users
+        users.add(user0);
+        users.add(user1);
+        users.add(user2);
+
+        // JSON declarations
+        JSONObject finalObject = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+
+        for (User user : users) {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("Id", user.getId());
+            jsonObject.put("Email", user.getEmail());
+            jsonObject.put("First_Name", user.getFirstName());
+            jsonObject.put("Last_Name", user.getLastName());
+            jsonObject.put("Avatar", user.getAvatar());
+            jsonArray.add(jsonObject);
+        }
+
+        // Create final response object
+        finalObject.put("status", 200);
+        finalObject.put("data", jsonArray);
+
+        // EndpointStub method
+        final String stubAnswer = new EndPointsStub().listUsersDelayed();
+
+        assertEquals(finalObject.toJSONString(), stubAnswer);
     }
 
 
