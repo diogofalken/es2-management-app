@@ -2,11 +2,11 @@ package types;
 
 public class User {
 
-    private final Integer id;
-    private final String email;
-    private final String firstName;
-    private final String lastName;
-    private final Object avatar;
+    private Integer id;
+    private String email;
+    private String firstName;
+    private String lastName;
+    private Object avatar;
 
     public User(final Integer id, final String email, final String firstName, final String lastName,
             final String avatar) {
@@ -50,5 +50,25 @@ public class User {
      */
     public Object getAvatar() {
         return avatar;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setAvatar(Object avatar) {
+        this.avatar = avatar;
     }
 }

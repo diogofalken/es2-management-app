@@ -21,4 +21,12 @@ public interface EndPointsMethods {
 
     String register(String email, String password);
 
+    String updateUser(User user);
+
+    String patchUser(User user);
+
+    String deleteUser(int _id);
+
+    String listUsersDelayed() throws InterruptedException;
+
 }

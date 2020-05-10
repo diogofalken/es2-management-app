@@ -317,4 +317,65 @@ public class EndPointsStubTests {
         assertEquals(finalObject.toJSONString(), stubAnswer);
     }
 
+    @Test
+    public void updateUser_Status200UpdatedUser() {
+        // Classes instances
+        final User user = new User(2, "xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "Falcao", "TiagovskiCoolXxX6969");
+
+        JSONObject finalObject = new JSONObject();
+
+        // Transform user in object
+        JSONObject userObject = new JSONObject();
+        userObject.put("Id", user.getId());
+        userObject.put("Email", user.getEmail());
+        userObject.put("First_Name", user.getFirstName());
+        userObject.put("Last_Name", user.getLastName());
+        userObject.put("Avatar", user.getAvatar());
+
+        // Create final response object
+        finalObject.put("status", 200);
+        finalObject.put("body", userObject);
+
+        // EndpointStub method
+        final String stubAnswer = new EndPointsStub().updateUser(user);
+
+        assertEquals(finalObject.toJSONString(), stubAnswer);
+    }
+
+    @Test
+    public void patchUser_Status200PatchedUser() {
+        // Classes instances
+        final User user = new User(2, "xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "Falcao", "TiagovskiCoolXxX6969");
+
+        JSONObject finalObject = new JSONObject();
+
+        // Transform user in object
+        JSONObject userObject = new JSONObject();
+        userObject.put("Id", user.getId());
+        userObject.put("Email", user.getEmail());
+        userObject.put("First_Name", user.getFirstName());
+        userObject.put("Last_Name", user.getLastName());
+        userObject.put("Avatar", user.getAvatar());
+
+        // Create final response object
+        finalObject.put("status", 200);
+        finalObject.put("body", userObject);
+
+        // EndpointStub method
+        final String stubAnswer = new EndPointsStub().updateUser(user);
+
+        assertEquals(finalObject.toJSONString(), stubAnswer);
+    }
+
+    @Test
+    public String deleteUser_Status204() {
+        return "";
+    }
+
+    @Test
+    public String listUsersDelayed_Status200AllUsers() {
+        return "";
+    }
+
+
 }
