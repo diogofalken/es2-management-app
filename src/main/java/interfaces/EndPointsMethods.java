@@ -7,18 +7,26 @@ import types.User;
  */
 public interface EndPointsMethods {
 
-    public String addUser(User user);
+    String addUser(User user);
 
-    public String listUsers();
+    String listUsers();
 
-    public String singleUser(int _id);
+    String singleUser(int _id);
 
-    public String listResources();
+    String listResources();
 
-    public String singleResource(int _id);
+    String singleResource(int _id);
 
-    public String authenticate(String email, String password);
+    String authenticate(String email, String password);
 
-    public String register(String email, String password);
+    String register(String email, String password);
+
+    String updateUser(User user);
+
+    String patchUser(User user);
+
+    String deleteUser(int _id);
+
+    String listUsersDelayed() throws InterruptedException;
 
 }
