@@ -20,8 +20,9 @@ public interface RestApiMethods {
 
     Resource singleResource(Integer id);
 
-    boolean authenticate(String email, String password);
+    boolean authenticate(String email, String password) throws Exception;
 
-    boolean register(String email, String password);
+    boolean register(String email, String password) throws Exception;
 
+    boolean removeUser(Integer id);
 }

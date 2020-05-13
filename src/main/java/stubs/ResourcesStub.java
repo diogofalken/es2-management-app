@@ -66,4 +66,9 @@ public class ResourcesStub implements RestApiMethods {
     public boolean register(String email, String password) throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
+
+    @Override
+    public boolean removeUser(Integer id) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException();
+    }
 }

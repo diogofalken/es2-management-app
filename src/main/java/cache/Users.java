@@ -57,10 +57,22 @@ public class Users {
      */
     public Collection<User> showUsers() throws Exception {
        Collection<User> users = this.restApiMethods.listUsers();
-
-       if(users == null)
-           throw new Exception("No users found");
-
        return users;
+    }
+
+    /**
+     *
+     * @param id
+     */
+    public void removeUser(Integer id) throws Exception {
+        boolean endpointResponse = this.restApiMethods.removeUser(id);
+
+        if(endpointResponse == false)
+            throw new Exception("User with that Id was not found");
+
+        this.users.forEach((key, value) -> {
+            if(value.getId() == id)
+                this.users.remove(key);
+        });
     }
 }

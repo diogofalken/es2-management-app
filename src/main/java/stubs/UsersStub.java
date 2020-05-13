@@ -18,9 +18,9 @@ public class UsersStub implements RestApiMethods {
 
     private void defaultUsers() {
         // Classes instances
-        final User user0 = new User(2, "xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "Falcao", "TiagovskiCoolXxX6969");
-        final User user1 = new User(3, "xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "Falcao", "MariaLealFanboyXxX6969");
-        final User user2 = new User(4, "xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "Falcao", "MinecraftGajasEAlcoolXxX6969");
+        final User user0 = new User(1, "xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "Falcao", "TiagovskiCoolXxX6969");
+        final User user1 = new User(2, "xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "Falcao", "MariaLealFanboyXxX6969");
+        final User user2 = new User(3, "xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "Falcao", "MinecraftGajasEAlcoolXxX6969");
 
         // Adding the users
         users.add(user0);
@@ -47,10 +47,7 @@ public class UsersStub implements RestApiMethods {
 
     @Override
     public Collection<User> listUsers() {
-        if(this.users.size() > 0)
-            return this.users;
-
-        return null;
+        return this.users;
     }
 
     @Override
@@ -80,6 +77,17 @@ public class UsersStub implements RestApiMethods {
     @Override
     public boolean register(String email, String password) throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean removeUser(Integer id) throws UnsupportedOperationException {
+        for(User user : this.users) {
+            if(user.getId() == id) {
+                this.users.remove(user);
+                return true;
+            }
+        }
+        return false;
     }
 
 }

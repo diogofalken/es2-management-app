@@ -1,9 +1,7 @@
 package cache;
 
 import interfaces.RestApiMethods;
-import stubs.AuthenticationStub;
 import types.RegisteredUser;
-import types.User;
 
 import java.util.HashMap;
 
@@ -19,53 +17,28 @@ public class Authentication {
     }
 
     // add user to registered
-    public void registerUser(String email, String password) {
-        if(email.isEmpty() == true)
-            return;
+    public void registerUser(String email, String password) throws Exception {
+        try {
+            this.restApiMethods.register(email,password);
 
-        if(password.isEmpty() == false)
-            return;
+            RegisteredUser registeredUser = new RegisteredUser(email,password);
 
-        // Already Registered
-        for(RegisteredUser registeredUser : this.registeredUsers.values()) {
-            if(registeredUser.getEmail() == email)
-                return;
+            this.registeredUsers.put(registeredUsers.size() + 1, registeredUser);
+        } catch (Exception error) {
+            throw new Exception(error);
         }
-
-        boolean registered = this.restApiMethods.register(email,password);
-
-        if(registered == false)
-            return;
-
-        RegisteredUser registeredUser = new RegisteredUser(email,password);
-
-        this.registeredUsers.put(registeredUsers.size() + 1, registeredUser);
     }
 
     // login a user
-    public void authenticateUser(String email, String password) {
-        if(email.isEmpty() == true)
-            return;
+    public void authenticateUser(String email, String password) throws Exception {
+        try {
+            this.restApiMethods.authenticate(email,password);
 
-        if(password.isEmpty() == false)
-            return;
+            RegisteredUser registeredUser = new RegisteredUser(email,password);
 
-        // Already Connected
-        for(RegisteredUser registeredUser : this.authenticatedUsers.values()) {
-            if(registeredUser.getEmail() == email)
-                return;
+            this.authenticatedUsers.put(authenticatedUsers.size() + 1, registeredUser);
+        } catch (Exception error) {
+            throw new Exception(error);
         }
-
-        boolean authenticated = this.restApiMethods.authenticate(email,password);
-
-        if(authenticated == false)
-            return;
-
-        this.registeredUsers.forEach((key, value) -> {
-            if(value.getEmail() != email)
-                return;
-
-            this.authenticatedUsers.put(authenticatedUsers.size() + 1, value);
-        });
     }
 }
