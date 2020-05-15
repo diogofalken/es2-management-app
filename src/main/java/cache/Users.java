@@ -19,7 +19,7 @@ public class Users {
      * @param user
      */
     public void addUser(User user) {
-        Boolean endpointResponse = this.restApiMethods.addUser(user);
+        boolean endpointResponse = this.restApiMethods.addUser(user);
 
         if(endpointResponse == false)
             return;

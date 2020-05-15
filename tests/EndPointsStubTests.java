@@ -2,7 +2,6 @@
 import cache.Authentication;
 import cache.Users;
 import interfaces.RestApiMethods;
-import org.json.simple.JSONObject;
 
 // Types/Classes imports
 import org.junit.jupiter.api.Test;
@@ -223,8 +222,4 @@ public class EndPointsStubTests {
             authentication.authenticateUser("diogo1@hotmail.com", "asdads");
         });
     }
-
-
-
-
 }
