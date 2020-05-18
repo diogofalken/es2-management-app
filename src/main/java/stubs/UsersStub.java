@@ -1,15 +1,13 @@
 package stubs;
 
-import interfaces.RestApiMethods;
-
-import types.Resource;
+import interfaces.UserRestApiMethods;
 import types.User;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 @SuppressWarnings("unchecked")
-public class UsersStub implements RestApiMethods {
+public class UsersStub implements UserRestApiMethods {
     private ArrayList<User> users = new ArrayList<User>();
 
     public UsersStub() {
@@ -18,9 +16,14 @@ public class UsersStub implements RestApiMethods {
 
     private void defaultUsers() {
         // Classes instances
-        final User user0 = new User(1, "xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "Falcao", "TiagovskiCoolXxX6969");
-        final User user1 = new User(2, "xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "Falcao", "MariaLealFanboyXxX6969");
-        final User user2 = new User(3, "xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "Falcao", "MinecraftGajasEAlcoolXxX6969");
+        final User user0 = new User("xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "Falcao", "TiagovskiCoolXxX6969");
+        final User user1 = new User("xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "Falcao", "MariaLealFanboyXxX6969");
+        final User user2 = new User("xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "Falcao", "MinecraftGajasEAlcoolXxX6969");
+
+        // Id
+        user0.setId(this.users.size() + 1);
+        user1.setId(this.users.size() + 1);
+        user2.setId(this.users.size() + 1);
 
         // Adding the users
         users.add(user0);
@@ -29,64 +32,39 @@ public class UsersStub implements RestApiMethods {
     }
 
     @Override
-    public boolean addUser(User user) {
+    public User postUser(User user) {
         // Checking if it already exists
-        for(User userTemp : this.users)
-            if(userTemp.getId() == user.getId())
-                return false;
+        for (User userTemp : this.users)
+            if (userTemp.getEmail().equals(user.getEmail()))
+                return null;
 
-        // Adding user
-        this.users.add(user);
+        user.setId(this.users.size() + 1);
 
-        // Verify if it was added
-        if(this.users.contains(user) == false)
-            return false;
+        return this.users.add(user) ? user : null;
 
-        return true;
     }
 
     @Override
-    public Collection<User> listUsers() {
-        return this.users;
+    public Collection<User> getUsers() {
+        return this.users.size() > 0 ? this.users : null;
     }
 
     @Override
-    public User singleUser(Integer id) {
-        for(User user : this.users)
-            if(user.getId() == id)
+    public User getUser(Integer id) {
+        for (User user : this.users)
+            if (user.getId() == id)
                 return user;
 
         return null;
     }
 
-    @Override
-    public Collection<Resource> listResources() throws UnsupportedOperationException {
-        throw new UnsupportedOperationException();
-    }
 
     @Override
-    public Resource singleResource(Integer id) throws UnsupportedOperationException {
-        throw new UnsupportedOperationException();
-    }
+    public boolean deleteUser(Integer id) {
+        for (User user : this.users)
+            if (user.getId() == id)
+                return this.users.remove(user) ? true : false;
 
-    @Override
-    public boolean authenticate(String email, String password) throws UnsupportedOperationException {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean register(String email, String password) throws UnsupportedOperationException {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean removeUser(Integer id) throws UnsupportedOperationException {
-        for(User user : this.users) {
-            if(user.getId() == id) {
-                this.users.remove(user);
-                return true;
-            }
-        }
         return false;
     }
 

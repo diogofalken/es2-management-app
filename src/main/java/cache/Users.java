@@ -1,78 +1,97 @@
 package cache;
 
-import interfaces.RestApiMethods;
+import interfaces.UserRestApiMethods;
 import types.User;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 
 public class Users {
     private HashMap<Integer, User> users = new HashMap<Integer, User>();
-    RestApiMethods restApiMethods;
+    private UserRestApiMethods userRestApiMethods;
 
-    public Users(RestApiMethods restApiMethods) {
-        this.restApiMethods = restApiMethods;
+    public Users(UserRestApiMethods userRestApiMethods) {
+        this.userRestApiMethods = userRestApiMethods;
     }
 
-    /**
-     * Will add a new User to the Users HashMap
-     * @param user
-     */
-    public void addUser(User user) {
-        boolean endpointResponse = this.restApiMethods.addUser(user);
+    public User addUser(User user) throws Exception {
 
-        if(endpointResponse == false)
-            return;
+        if (user.getEmail().length() > 50)
+            throw new IOException("Email length can't exceed 50 characters");
 
-        this.users.forEach((key, value) -> {
-            // Verifying if it already exists on the HashMap
-            if(value.getId() == user.getId())
-                return;
-            // Adding new User
-            this.users.put(this.users.size() + 1, user);
-        });
+        if (user.getEmail().isEmpty() == true)
+            throw new IOException("Missing Email");
+
+        if (user.getFirstName().length() > 25)
+            throw new IOException("First Name length can't exceed 25 characters");
+
+        if (user.getFirstName().isEmpty() == true)
+            throw new IOException("Missing First Name");
+
+        if (user.getLastName().length() > 50)
+            throw new IOException("Last Name length can't exceed than 50 characters");
+
+        if (user.getLastName().isEmpty() == true)
+            throw new IOException("Missing Last Name");
+
+        if (user.getAvatar().length() > 30)
+            throw new IOException("Avatar length can't exceed than 30 characters");
+
+        if (user.getAvatar().isEmpty() == true)
+            throw new IOException("Missing Avatar");
+
+        for (User userTemp : this.users.values())
+            if (userTemp.getEmail().equals(user.getEmail()))
+                throw new Exception("User already exists");
+
+        User responseStub = this.userRestApiMethods.postUser(user);
+
+        if (responseStub == null)
+            throw new Exception("User not added in Stub");
+
+        // Adding new User
+        this.users.put(this.users.size() + 1, responseStub);
+
+        return responseStub;
     }
 
-    /**
-     * Will list a single User depending on its Id
-     * @param id
-     */
     public User showUser(Integer id) throws Exception {
-        for (User user : this.users.values()) {
-            if(user.getId() == id)
+
+        if (id == null)
+            throw new IOException("Id Missing");
+
+        // Getting user from the Cache Users List
+        for (User user : this.users.values())
+            if (user.getId() == id)
                 return user;
-        }
 
-        User user = this.restApiMethods.singleUser(id);
+        User responseUser = this.userRestApiMethods.getUser(id);
 
-        if(user == null)
-            throw new Exception("No user with that ID found");
-
-        return user;
-    }
-
-    /**
-     * Will list all users
-     * @return collection of users
-     */
-    public Collection<User> showUsers() throws Exception {
-       Collection<User> users = this.restApiMethods.listUsers();
-       return users;
-    }
-
-    /**
-     *
-     * @param id
-     */
-    public void removeUser(Integer id) throws Exception {
-        boolean endpointResponse = this.restApiMethods.removeUser(id);
-
-        if(endpointResponse == false)
+        if (responseUser == null)
             throw new Exception("User with that Id was not found");
 
-        this.users.forEach((key, value) -> {
-            if(value.getId() == id)
+        return responseUser;
+    }
+
+    public Collection<User> showUsers() {
+        return this.userRestApiMethods.getUsers();
+    }
+
+    public void removeUser(Integer id) throws Exception {
+
+        if (id == null)
+            throw new IOException("Id Missing");
+
+        boolean responseUser = this.userRestApiMethods.deleteUser(id);
+
+        if (responseUser == false)
+            throw new Exception("User with that Id was not found");
+
+        for(Integer key : this.users.keySet()) {
+            if(this.users.get(key).getId() == id) {
                 this.users.remove(key);
-        });
+            }
+        }
     }
 }

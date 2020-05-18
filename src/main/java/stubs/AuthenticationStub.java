@@ -1,18 +1,15 @@
 package stubs;
 
-import interfaces.RestApiMethods;
-import types.RegisteredUser;
-import types.Resource;
-import types.User;
+import interfaces.AuthenticationRestApiMethods;
+import types.Account;
 
-import java.util.Collection;
 import java.util.HashMap;
 
-public class AuthenticationStub implements RestApiMethods {
+public class AuthenticationStub implements AuthenticationRestApiMethods {
 
     // fields
-    private HashMap<Integer, RegisteredUser> registeredUsers = new HashMap<Integer, RegisteredUser>();
-    private HashMap<Integer, RegisteredUser> authenticatedUsers = new HashMap<Integer, RegisteredUser>();
+    private HashMap<Integer, Account> registeredAccount = new HashMap<Integer, Account>();
+    private HashMap<Integer, Account> authenticatedAccount = new HashMap<Integer, Account>();
 
     public AuthenticationStub() {
         this.defaultRegisteredUsers();
@@ -20,76 +17,46 @@ public class AuthenticationStub implements RestApiMethods {
     }
 
     private void defaultRegisteredUsers() {
-        final RegisteredUser registeredUser = new RegisteredUser("diogo@hotmail.com", "A123");
-        this.registeredUsers.put(1,registeredUser);
+        final Account registeredUser = new Account("diogo@hotmail.com", "A123");
+        this.registeredAccount.put(1, registeredUser);
     }
 
     private void defaultAuthenticateUsers() {
-        final RegisteredUser registeredUser = new RegisteredUser("diogo@hotmail.com", "A123");
-        this.authenticatedUsers.put(1,registeredUser);
+        final Account registeredUser = new Account("diogo@hotmail.com", "A123");
+        this.authenticatedAccount.put(this.authenticatedAccount.size() + 1, registeredUser);
     }
 
     @Override
-    public boolean addUser(User user) throws UnsupportedOperationException {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Collection<User> listUsers() throws UnsupportedOperationException {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public User singleUser(Integer id) throws UnsupportedOperationException {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Collection<Resource> listResources() throws UnsupportedOperationException {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Resource singleResource(Integer id) throws UnsupportedOperationException {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean authenticate(String email, String password) throws Exception {
-        if(email.isEmpty() == true)
+    public boolean postLogin(Account account) throws Exception {
+        if (account.getEmail().isEmpty() == true)
             throw new Exception("Missing Email");
 
-        if(password.isEmpty() == true)
+        if (account.getPassword().isEmpty() == true)
             throw new Exception("Missing Password");
 
         // Already Registered
-        for(RegisteredUser registeredUser : this.registeredUsers.values()) {
-            if (registeredUser.getEmail().equals(email))
-                throw new Exception("Email already registered");
-        }
+        for (Account registeredAccount : this.registeredAccount.values())
+            if (registeredAccount.getEmail().equals(account.getEmail()))
+                throw new Exception("Already Connected");
+
 
         return true;
-    }
+     }
 
     @Override
-    public boolean register(String email, String password) throws Exception {
-        if(email.isEmpty() == true)
+    public boolean postRegister(Account account) throws Exception {
+        if (account.getEmail().isEmpty() == true)
             throw new Exception("Missing Email");
 
-        if(password.isEmpty() == true)
+        if (account.getPassword().isEmpty() == true)
             throw new Exception("Missing Password");
 
         // Already Connected
-        for(RegisteredUser authenticatedUsers : this.authenticatedUsers.values()) {
-            if (authenticatedUsers.getEmail().equals(email))
-                throw new Exception("Email already connected");
-        }
+        for (Account authenticatedAccount : this.authenticatedAccount.values())
+            if (authenticatedAccount.getEmail().equals(account.getEmail()))
+                throw new Exception("Already Registered");
+
 
         return true;
-    }
-
-    @Override
-    public boolean removeUser(Integer id) throws UnsupportedOperationException {
-        throw new UnsupportedOperationException();
     }
 }

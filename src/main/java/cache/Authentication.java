@@ -1,44 +1,31 @@
 package cache;
 
-import interfaces.RestApiMethods;
-import types.RegisteredUser;
+import interfaces.AuthenticationRestApiMethods;
+import types.Account;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 public class Authentication {
 
     // fields
-    private HashMap<Integer, RegisteredUser> registeredUsers = new HashMap<Integer, RegisteredUser>();
-    private HashMap<Integer, RegisteredUser> authenticatedUsers = new HashMap<Integer, RegisteredUser>();
-    RestApiMethods restApiMethods;
+    private AuthenticationRestApiMethods authenticationRestApiMethods;
 
-    public Authentication(RestApiMethods restApiMethods) {
-        this.restApiMethods = restApiMethods;
+    public Authentication(AuthenticationRestApiMethods authenticationRestApiMethods) {
+        this.authenticationRestApiMethods = authenticationRestApiMethods;
     }
 
     // add user to registered
-    public void registerUser(String email, String password) throws Exception {
-        try {
-            this.restApiMethods.register(email,password);
+    public void registerAccount(String email, String password) throws Exception {
+        Account account = new Account(email, password);
 
-            RegisteredUser registeredUser = new RegisteredUser(email,password);
-
-            this.registeredUsers.put(registeredUsers.size() + 1, registeredUser);
-        } catch (Exception error) {
-            throw new Exception(error);
-        }
+        this.authenticationRestApiMethods.postRegister(account);
     }
 
     // login a user
-    public void authenticateUser(String email, String password) throws Exception {
-        try {
-            this.restApiMethods.authenticate(email,password);
+    public void authenticateAccount(String email, String password) throws Exception {
+        Account account = new Account(email, password);
 
-            RegisteredUser registeredUser = new RegisteredUser(email,password);
-
-            this.authenticatedUsers.put(authenticatedUsers.size() + 1, registeredUser);
-        } catch (Exception error) {
-            throw new Exception(error);
-        }
+        this.authenticationRestApiMethods.postLogin(account);
     }
 }

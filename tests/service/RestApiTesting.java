@@ -1,21 +1,24 @@
+package service;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.junit.Test;
-import types.RegisteredUser;
+import org.junit.jupiter.api.Test;
+import types.Account;
 import types.User;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class RestAPIServiceTests {
+public class RestApiTesting {
 
     @Test
     public void testAddUser_Status201NewUser() {
-        User user = new User(1,"xxxdiogofalcaogamerpt69xxx@yahoo.com.br", "Diogo", "Falcão", "A21");
+        User user = new User("xxxdiogofalcaogamerpt69xxx@yahoo.com.br", "Diogo", "Falcão", "A21");
 
         // JSON Object
         JSONObject jsonObject = new JSONObject();
@@ -62,7 +65,7 @@ public class RestAPIServiceTests {
 
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
-
+            
             jsonObject.forEach((key, value) -> {
                 assertEquals(jsonObject.get(key), jsonOutput.get(key));
             });
@@ -176,7 +179,7 @@ public class RestAPIServiceTests {
     public void testListResources_Status200AllResources() {
         try {
             // Creation URL Connection
-            URL url = new URL("https://reqres.in/api/resources/1000");
+            URL url = new URL("https://reqres.in/api/resources");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
             // Defining Request methods and Content Type
@@ -184,7 +187,25 @@ public class RestAPIServiceTests {
             connection.setRequestProperty("Accept", "application/json");
             connection.setRequestProperty("Content-Type", "application/json");
 
-            assertEquals(connection.getResponseCode(), 404);
+            // Buffer
+            InputStreamReader in = new InputStreamReader(connection.getInputStream());
+            BufferedReader br = new BufferedReader(in);
+
+
+            // String Builder
+            StringBuilder result = new StringBuilder();
+
+            // Output
+            String output;
+
+            while ((output = br.readLine()) != null) {
+                result.append(output);
+            }
+
+            // Closing the buffer
+            br.close();
+
+            assertEquals(connection.getResponseCode(), 200);
 
             connection.disconnect();
         } catch (Exception e) {
@@ -251,7 +272,7 @@ public class RestAPIServiceTests {
 
     @Test
     public void testRegister_Status200NewRegisteredUser() {
-        RegisteredUser registeredUser = new RegisteredUser("eve.holt@reqres.in", "pistol");
+        Account registeredUser = new Account("eve.holt@reqres.in", "pistol");
 
         // JSON Object
         JSONObject jsonObject = new JSONObject();
@@ -315,11 +336,11 @@ public class RestAPIServiceTests {
 
     @Test
     public void testRegister_Status400_MissingEmail() {
-        RegisteredUser registeredUser = new RegisteredUser("eve.holt@reqres.in", "pistol");
+        Account registeredUser = new Account("eve.holt@reqres.in", "pistol");
 
         // JSON Object
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("email", registeredUser.getEmail());
+        jsonObject.put("password", registeredUser.getPassword());
 
         try {
             // Creation URL Connection
@@ -336,29 +357,6 @@ public class RestAPIServiceTests {
             OutputStream outputStream = connection.getOutputStream();
             outputStream.write(jsonObject.toJSONString().getBytes("UTF-8"));
             outputStream.close();
-
-            // Buffer
-            InputStreamReader in = new InputStreamReader(connection.getInputStream());
-            BufferedReader br = new BufferedReader(in);
-
-            // String Builder
-            StringBuilder result = new StringBuilder();
-
-            // Output
-            String output;
-            while ((output = br.readLine()) != null) {
-                result.append(output);
-            }
-
-            // Closing the buffer
-            br.close();
-
-            JSONParser jsonParser = new JSONParser();
-            JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
-
-            jsonOutput.forEach((key, value) -> {
-                assertEquals(jsonOutput.get(key), "Missing password");
-            });
 
             assertEquals(connection.getResponseCode(), 400);
 
@@ -370,7 +368,7 @@ public class RestAPIServiceTests {
 
     @Test
     public void testRegister_Status400_MissingPassword() {
-        RegisteredUser registeredUser = new RegisteredUser("eve.holt@reqres.in", "pistol");
+        Account registeredUser = new Account("eve.holt@reqres.in", "pistol");
 
         // JSON Object
         JSONObject jsonObject = new JSONObject();
@@ -392,7 +390,38 @@ public class RestAPIServiceTests {
             outputStream.write(jsonObject.toJSONString().getBytes("UTF-8"));
             outputStream.close();
 
-            System.out.println(connection.getResponseCode());
+            assertEquals(connection.getResponseCode(), 400);
+
+            connection.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testAuthenticate_Status200NewAuthenticatedUser() {
+        Account registeredUser = new Account("eve.holt@reqres.in", "pistol");
+
+        // JSON Object
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("email", registeredUser.getEmail());
+        jsonObject.put("password", registeredUser.getPassword());
+
+        try {
+            // Creation URL Connection
+            URL url = new URL("https://reqres.in/api/login");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            // Defining Request methods and Content Type
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("Content-Type", "application/json");
+
+            // Output To send
+            OutputStream outputStream = connection.getOutputStream();
+            outputStream.write(jsonObject.toJSONString().getBytes("UTF-8"));
+            outputStream.close();
 
             // Buffer
             InputStreamReader in = new InputStreamReader(connection.getInputStream());
@@ -414,8 +443,42 @@ public class RestAPIServiceTests {
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
 
             jsonOutput.forEach((key, value) -> {
-                assertEquals(jsonOutput.get(key), "Missing password");
+                if(key.equals("token")) {
+                    assertEquals(key, "token");
+                }
             });
+
+            assertEquals(connection.getResponseCode(), 200);
+
+            connection.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testAuthenticate_Status400_MissingEmail() {
+        Account registeredUser = new Account("eve.holt@reqres.in", "pistol");
+
+        // JSON Object
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("password", registeredUser.getPassword());
+
+        try {
+            // Creation URL Connection
+            URL url = new URL("https://reqres.in/api/login");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            // Defining Request methods and Content Type
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("Content-Type", "application/json");
+
+            // Output To send
+            OutputStream outputStream = connection.getOutputStream();
+            outputStream.write(jsonObject.toJSONString().getBytes("UTF-8"));
+            outputStream.close();
 
             assertEquals(connection.getResponseCode(), 400);
 
@@ -426,12 +489,35 @@ public class RestAPIServiceTests {
     }
 
     @Test
-    public void testAuthenticate_Status200NewAuthenticatedUser() {
+    public void testAuthenticate_Status400_MissingPassword() {
+        Account registeredUser = new Account("eve.holt@reqres.in", "pistol");
 
+        // JSON Object
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("email", registeredUser.getEmail());
+
+        try {
+            // Creation URL Connection
+            URL url = new URL("https://reqres.in/api/login");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            // Defining Request methods and Content Type
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("Content-Type", "application/json");
+
+            // Output To send
+            OutputStream outputStream = connection.getOutputStream();
+            outputStream.write(jsonObject.toJSONString().getBytes("UTF-8"));
+            outputStream.close();
+
+            assertEquals(connection.getResponseCode(), 400);
+
+            connection.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    @Test
-    public void testAuthenticate_Status400() {
-
-    }
 }
