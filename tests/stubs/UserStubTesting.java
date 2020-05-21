@@ -269,7 +269,7 @@ public class UserStubTesting {
         UserRestApiMethods userRestApiMethods = new UsersStub();
 
         // User that will be Added
-        User user = new User("xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "Falcao", "TiagovskiCoolXxX6969");
+        User user = new User("xxxx@outlook.pt", "DiogoDiogoDiogoDiogoDiogoDiogo", "Falcao", "TiagovskiCoolXxX6969");
 
         // Adding the User
         Users users = new Users(userRestApiMethods);
