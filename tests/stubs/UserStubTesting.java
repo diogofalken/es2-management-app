@@ -91,7 +91,9 @@ public class UserStubTesting {
         // Users Ref
         Users users = new Users(userRestApiMethods);
 
-        assertNotEquals(null,users.showUsers());
+        assertDoesNotThrow(() -> {
+            users.showUsers();
+        });
     }
 
     @Test
