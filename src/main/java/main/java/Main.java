@@ -1,14 +1,11 @@
 package main.java;
-
-import middlewares.UsersMiddleware;
-import org.json.simple.parser.ParseException;
-import types.User;
+import middlewares.AuthenticationMiddleware;
+import types.Account;
 
 public class Main {
-    public static void main(String[] args) throws ParseException {
-        User user = new User("xxxdiogofalcaogamerpt69xxx@yahoo.com.br", "Diogo", "Falcão", "A21");
-        UsersMiddleware usersMiddleware = new UsersMiddleware();
-        System.out.println(usersMiddleware.getUser(1).getId());
-
+    public static void main(String[] args) throws Exception {
+        AuthenticationMiddleware authenticationMiddleware = new AuthenticationMiddleware();
+        Account registeredUser = new Account("eve.holt@reqres.in", "pistol");
+        System.out.println(authenticationMiddleware.postRegister(registeredUser));
     }
 }

@@ -11,16 +11,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 
 public class UsersMiddleware implements UserRestApiMethods {
-
-    public UsersMiddleware() {
-    }
-
     @Override
     public User postUser(User user) {
         // JSON Object
@@ -173,37 +167,21 @@ public class UsersMiddleware implements UserRestApiMethods {
 
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
+            JSONObject jsonData = (JSONObject) jsonOutput.get("data");
 
             // fields
-            String email = "";
-            String firstName = "";
-            String lastName = "";
-            String avatar = "";
+            String email = jsonData.get("email").toString();
+            String firstName = jsonData.get("first_name").toString();
+            String lastName = jsonData.get("last_name").toString();
+            String avatar = jsonData.get("avatar").toString();
 
-            for (Object key : jsonOutput.keySet()) {
-                if(jsonOutput.get(key).toString().equals("email") == true) {
-                    email = jsonOutput.get(key).toString();
-                }
-                if(jsonOutput.get(key).toString().equals("firstName") == true) {
-                    firstName = jsonOutput.get(key).toString();
-                }
-                if(jsonOutput.get(key).toString().equals("lastName") == true) {
-                    lastName = jsonOutput.get(key).toString();
-                }
-                if(jsonOutput.get(key).toString().equals("avatar") == true) {
-                    avatar = jsonOutput.get(key).toString();
-                }
+            User user = new User(email, firstName , lastName , avatar);
 
-                User user = new User(email, firstName, lastName , avatar);
+            user.setId(Integer.parseInt(jsonData.get("id").toString()));
 
-                System.out.println(jsonOutput.values());
-
-                if(jsonOutput.get(key).toString().equals("id") == true)
-                    user.setId(Integer.parseInt((String) jsonOutput.get(key)));
-
-                return user;
-            }
             connection.disconnect();
+
+            return user;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -213,6 +191,24 @@ public class UsersMiddleware implements UserRestApiMethods {
 
     @Override
     public boolean deleteUser(Integer id) {
+        try {
+            // Creation URL Connection
+            URL url = new URL("https://reqres.in/api/users/" + id);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            // Defining Request methods and Content Type
+            connection.setRequestMethod("DELETE");
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.disconnect();
+
+            if(connection.getResponseCode() == 204)
+                return true;
+
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return false;
     }
 }

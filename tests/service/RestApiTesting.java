@@ -176,6 +176,26 @@ public class RestApiTesting {
     }
 
     @Test
+    public void testDeleteUser_Status204() {
+        try {
+            // Creation URL Connection
+            URL url = new URL("https://reqres.in/api/users/2");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            // Defining Request methods and Content Type
+            connection.setRequestMethod("DELETE");
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("Content-Type", "application/json");
+
+            assertEquals(connection.getResponseCode(), 204);
+
+            connection.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
     public void testListResources_Status200AllResources() {
         try {
             // Creation URL Connection
