@@ -1,6 +1,7 @@
 package middlewares;
 
 import interfaces.UserRestApiMethods;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import types.User;
@@ -10,6 +11,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.Key;
 import java.util.Collection;
 
 public class UsersMiddleware implements UserRestApiMethods {
@@ -82,6 +84,61 @@ public class UsersMiddleware implements UserRestApiMethods {
 
     @Override
     public Collection<User> getUsers() {
+        try {
+            // Creation URL Connection
+            URL url = new URL("https://reqres.in/api/users");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            // Defining Request methods and Content Type
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("Content-Type", "application/json");
+
+            // Buffer
+            InputStreamReader in = new InputStreamReader(connection.getInputStream());
+            BufferedReader br = new BufferedReader(in);
+
+            // String Builder
+            StringBuilder result = new StringBuilder();
+
+            // Output
+            String output;
+
+            while ((output = br.readLine()) != null) {
+                result.append(output);
+            }
+
+            // Closing the buffer
+            br.close();
+
+            JSONParser jsonParser = new JSONParser();
+            JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
+            JSONArray jsonArray = (JSONArray) jsonOutput.get("data");
+
+            Collection<User> userCollection = null;
+
+            for(int i = 0; i <= jsonArray.size(); i++) {
+                System.out.println("hey");
+                JSONObject jsonobject = (JSONObject) jsonArray.get(i);
+
+                User user = new User(
+                        jsonobject.get("email").toString(),
+                        jsonobject.get("firstName").toString(),
+                        jsonobject.get("lastName").toString(),
+                        jsonobject.get("avatar").toString()
+                );
+
+                System.out.println(jsonobject.get("email").toString());
+
+                user.setId((Integer) jsonobject.get("id"));
+
+                userCollection.add(user);
+            }
+            connection.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 

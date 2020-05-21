@@ -172,7 +172,7 @@ public class UserStubTesting {
 
         // Asserting Answer
         assertThrows(Exception.class, () -> {
-            users.showUser(10);
+            users.removeUser(10);
         });
     }
 
