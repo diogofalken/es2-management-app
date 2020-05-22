@@ -60,21 +60,4 @@ public class ResourceStubTesting {
             resources.showResources();
         });
     }
-
-    // BlackBox Testing
-
-    @Test
-    public void testShowResource_ResourceIdNotFound_MustReturnException() {
-        // Resource Stub
-        ResourceRestApiMethods resourceRestApiMethods = new ResourcesStub();
-
-        // Adding the Resource
-        Resources resources = new Resources(resourceRestApiMethods);
-
-        // Asserting Answer
-        assertThrows(Exception.class, () -> {
-            resources.showResource(10);
-        });
-
-    }
 }
