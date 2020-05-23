@@ -61,7 +61,7 @@ public class AuthenticationMiddleware implements AuthenticationRestApiMethods {
 
         if (account.getPassword().isEmpty() == true)
             throw new Exception("Missing Password");
-        
+
         // JSON Object
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("email", account.getEmail());

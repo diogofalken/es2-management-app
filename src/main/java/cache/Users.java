@@ -29,13 +29,19 @@ public class Users {
         if (user.getFirstName().isEmpty() == true)
             throw new IOException("Missing First Name");
 
+        if (user.getFirstName().matches("^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$") == false)
+            throw new IOException("First Name must only contain letters");
+
         if (user.getLastName().length() > 50)
             throw new IOException("Last Name length can't exceed than 50 characters");
 
         if (user.getLastName().isEmpty() == true)
             throw new IOException("Missing Last Name");
 
-        if (user.getAvatar().length() > 30)
+        if (user.getLastName().matches("^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$") == false)
+            throw new IOException("First Name must only contain letters");
+
+        if (user.getAvatar().length() > 100)
             throw new IOException("Avatar length can't exceed than 30 characters");
 
         if (user.getAvatar().isEmpty() == true)

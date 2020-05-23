@@ -18,7 +18,7 @@ public class ResourceStubTesting {
         Resources resources = new Resources(resourceRestApiMethods);
 
         // Asserting Answer
-        assertEquals(resources.showResource(1).getId(), 1);
+        assertEquals(1, resources.showResource(1).getId());
     }
 
     @Test
@@ -30,7 +30,7 @@ public class ResourceStubTesting {
         Resources resources = new Resources(resourceRestApiMethods);
 
         // Asserting Answer
-        assertEquals(resources.showResource(2).getId(), 2);
+        assertEquals(2, resources.showResource(2).getId());
     }
 
     @Test
