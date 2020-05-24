@@ -76,7 +76,7 @@ public class ResourcesMiddleware implements ResourceRestApiMethods {
     public Resource getResource(Integer id) {
         try {
             // Creation URL Connection
-            URL url = new URL("https://reqres.in/api/resources/1");
+            URL url = new URL("https://reqres.in/api/resources/" + id);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
             // Defining Request methods and Content Type

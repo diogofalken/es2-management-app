@@ -34,11 +34,7 @@ public class AuthenticationStub implements AuthenticationRestApiMethods {
         if (account.getPassword().isEmpty() == true)
             throw new Exception("Missing Password");
 
-        // Already Registered
-        for (Account registeredAccount : this.registeredAccount.values())
-            if (registeredAccount.getEmail().equals(account.getEmail()))
-                throw new Exception("Already Connected");
-
+        this.authenticatedAccount.put(authenticatedAccount.size() + 1,account);
 
         return true;
      }
@@ -51,11 +47,7 @@ public class AuthenticationStub implements AuthenticationRestApiMethods {
         if (account.getPassword().isEmpty() == true)
             throw new Exception("Missing Password");
 
-        // Already Connected
-        for (Account authenticatedAccount : this.authenticatedAccount.values())
-            if (authenticatedAccount.getEmail().equals(account.getEmail()))
-                throw new Exception("Already Registered");
-
+        this.registeredAccount.put(registeredAccount.size() + 1,account);
 
         return true;
     }

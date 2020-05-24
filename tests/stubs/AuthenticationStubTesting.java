@@ -9,8 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AuthenticationStubTesting {
 
-    // Application Testing
-
     @Test
     public void testRegisterAccount_CorrectEmailAndPassword_MustNotReturnException() throws Exception {
         // Account Stub
@@ -24,20 +22,7 @@ public class AuthenticationStubTesting {
             authentication.registerAccount("diogoxd97@hotmail.com", "A12S");
         });
     }
-
-    @Test
-    public void testRegisterAccount_AlreadyRegistered_MustReturnException() {
-        // Account Stub
-        AuthenticationRestApiMethods authenticationRestApiMethods = new AuthenticationStub();
-
-        // Authentication
-        Authentication authentication = new Authentication(authenticationRestApiMethods);
-
-        assertThrows(Exception.class, () -> {
-            // Register
-            authentication.registerAccount("diogo@hotmail.com", "A12S");
-        });
-    }
+    
 
     @Test
     public void testAuthenticateAccount_CorrectEmailAndPassword_MustNotReturnException() {
@@ -53,21 +38,6 @@ public class AuthenticationStubTesting {
         });
     }
 
-    @Test
-    public void testAuthenticateAccount_AlreadyConnected_MustReturnException() {
-        // Account Stub
-        AuthenticationRestApiMethods authenticationRestApiMethods = new AuthenticationStub();
-
-        // Authentication
-        Authentication authentication = new Authentication(authenticationRestApiMethods);
-
-        assertThrows(Exception.class, () -> {
-            // Register
-            authentication.authenticateAccount("diogo@hotmail.com", "A12S");
-        });
-    }
-
-    // Blackbox Testing
 
     @Test
     public void testRegisterAccount_MissingEmail_MustReturnException() {

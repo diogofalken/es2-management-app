@@ -48,7 +48,7 @@ public class ResourceStubTesting {
     }
 
     @Test
-    public void testShowResources_ListOfResources_MustReturnAllResources() throws Exception {
+    public void testShowResources_ListOfResources_MustNotReturnException() throws Exception {
         // Resource Stub
         ResourceRestApiMethods resourceRestApiMethods = new ResourcesStub();
 
