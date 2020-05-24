@@ -7,6 +7,7 @@ import org.json.simple.parser.JSONParser;
 import types.User;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -16,7 +17,7 @@ import java.util.Collection;
 
 public class UsersMiddleware implements UserRestApiMethods {
     @Override
-    public User postUser(User user) {
+    public User postUser(User user) throws Exception {
         // JSON Object
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("email", user.getEmail());
@@ -26,6 +27,14 @@ public class UsersMiddleware implements UserRestApiMethods {
 
         // JSON String
         String jsonString = jsonObject.toString();
+
+        Collection<User> userCollection = this.getUsers();
+
+        for(User userTemp : userCollection) {
+            if( userTemp.getEmail().equals(user.getEmail())) {
+                throw new Exception("User is already registered");
+            }
+        }
 
         try {
             // Creation URL Connection
@@ -66,6 +75,23 @@ public class UsersMiddleware implements UserRestApiMethods {
 
             for(Object key : jsonOutput.keySet()) {
                 if(key.equals("id") == true) {
+
+                    if((jsonOutput.get(key) instanceof String) == false) {
+                        throw new Exception("Id must be String until converted to Integer");
+                    }
+
+                    if(jsonOutput.get(key).toString().isEmpty()) {
+                        throw new Exception("Id is Empty");
+                    }
+
+                    if((jsonOutput.get(key).toString().matches("[0-9]+")) == false) {
+                        throw new Exception("Id must be only numbers");
+                    }
+
+                    if(Integer.parseInt((String) jsonOutput.get(key)) <= 0) {
+                        throw new Exception("Id is lower or equal to Zero");
+                    }
+
                     user.setId(Integer.parseInt((String) jsonOutput.get(key)));
                 }
             }
@@ -116,9 +142,9 @@ public class UsersMiddleware implements UserRestApiMethods {
             for(int i = 0; i < jsonArray.size(); i++) {
                 JSONObject jsonobject = (JSONObject) jsonArray.get(i);
                 String email = jsonobject.get("email").toString();
-                String firstName = jsonobject.get("email").toString();
-                String lastName = jsonobject.get("email").toString();
-                String avatar = jsonobject.get("email").toString();
+                String firstName = jsonobject.get("first_name").toString();
+                String lastName = jsonobject.get("last_name").toString();
+                String avatar = jsonobject.get("avatar").toString();
 
                 User user = new User(email, firstName, lastName, avatar);
 
@@ -140,7 +166,7 @@ public class UsersMiddleware implements UserRestApiMethods {
     public User getUser(Integer id) {
         try {
             // Creation URL Connection
-            URL url = new URL("https://reqres.in/api/users/1");
+            URL url = new URL("https://reqres.in/api/users/" + id);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
             // Defining Request methods and Content Type
@@ -167,6 +193,7 @@ public class UsersMiddleware implements UserRestApiMethods {
 
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
+
             JSONObject jsonData = (JSONObject) jsonOutput.get("data");
 
             // fields

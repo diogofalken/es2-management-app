@@ -31,23 +31,6 @@ public class UserStubTesting {
     }
 
     @Test
-    public void testAddUser_CorrectNewUser_MustReturnAnException() throws Exception {
-        // User Stub
-        UserRestApiMethods userRestApiMethods = new UsersStub();
-
-        // User that will be Added
-        User user = new User("falcao@outlook.pt", "Diogo", "Falcao", "TiagovskiCoolXxX6969");
-
-        // Adding the User
-        Users users = new Users(userRestApiMethods);
-
-        // Asserting Answer
-        assertThrows(Exception.class, () -> {
-            users.showUser(user.getId());
-        });
-    }
-
-    @Test
     public void testAddUser_UserAlreadyExistsAtStub_MustReturnAnException() throws Exception {
         // User Stub
         UserRestApiMethods userRestApiMethods = new UsersStub();
@@ -84,7 +67,7 @@ public class UserStubTesting {
     }
 
     @Test
-    public void testShowUsers_ListOfUsers_MustReturnUsers() {
+    public void testShowUsers_ListOfUsers_MustNotReturnException() {
         // User Stub
         UserRestApiMethods userRestApiMethods = new UsersStub();
 
@@ -97,7 +80,7 @@ public class UserStubTesting {
     }
 
     @Test
-    public void testShowUser_UserFoundAtCache_MustReturnUserFromCache() throws Exception {
+    public void testShowUser_UserFoundAtCache_IdMustBeEqualToGiven()  throws Exception {
         // User Stub
         UserRestApiMethods userRestApiMethods = new UsersStub();
 
@@ -116,7 +99,7 @@ public class UserStubTesting {
     }
 
     @Test
-    public void testShowUser_UserFoundAtStub_MustReturnUserFromStub() throws Exception {
+    public void testShowUser_UserFoundAtStub_IdMustBeEqualToGiven() throws Exception {
         // User Stub
         UserRestApiMethods userRestApiMethods = new UsersStub();
 
@@ -128,37 +111,26 @@ public class UserStubTesting {
     }
 
     @Test
-    public void testShowUser_UserNotFound_MustReturnAnException() throws Exception {
-        // User Stub
-        UserRestApiMethods userRestApiMethods = new UsersStub();
-
-        // Adding the User
-        Users users = new Users(userRestApiMethods);
-
+    public void testShowUser_UserWasNotFound_MustReturnAnException() {
         // Asserting Answer
         assertThrows(Exception.class, () -> {
-            users.showUser(10);
+            new Users(new UsersStub()).showUser(100000);
         });
     }
 
     @Test
-    public void testRemoveUser_UserFoundAtStub_MustNotBeFoundOnStub() throws Exception {
-        // User Stub
-        UserRestApiMethods userRestApiMethods = new UsersStub();
-
-        // User that will be Added
-        User user = new User("falcao@outlook.pt", "Diogo", "Falcao", "TiagovskiCoolXxX6969");
-
-        // Adding the User
-        Users users = new Users(userRestApiMethods);
-        users.addUser(user);
-
-        // Removing the User
-        users.removeUser(user.getId());
-
+    public void testShowUser_IdIsNull_MustReturnAnException() {
         // Asserting Answer
         assertThrows(Exception.class, () -> {
-            users.showUser(user.getId());
+            new Users(new UsersStub()).showUser(null);
+        });
+    }
+
+    @Test
+    public void testRemoveUser_IdIsNull_MustReturnAnException() {
+        // Asserting Answer
+        assertThrows(Exception.class, () -> {
+            new Users(new UsersStub()).removeUser(null);
         });
     }
 
@@ -179,268 +151,171 @@ public class UserStubTesting {
     // Parameters Testing (Equivalence)
 
     @Test
-    public void testAddUser_MissingEmailUser_MustReturnAnException() {
-        // User Stub
-        UserRestApiMethods userRestApiMethods = new UsersStub();
-
-        // User that will be Added
-        User user = new User("", "Diogo", "Falcao", "TiagovskiCoolXxX6969");
-
-        // Adding the User
-        Users users = new Users(userRestApiMethods);
-
+    public void testAddUser_MissingEmail_MustReturnAnException() {
         // Asserting Answer
         assertThrows(Exception.class, () -> {
-            users.addUser(user);
+            new Users(new UsersStub()).addUser(new User("", "Diogo", "Falcao", "TiagovskiCoolXxX6969"));
         });
     }
 
     @Test
-    public void testAddUser_MissingFirstNameUser_MustReturnAnException() {
-        // User Stub
-        UserRestApiMethods userRestApiMethods = new UsersStub();
-
-        // User that will be Added
-        User user = new User("xX69FalcaoZinhoGamer69Xx@outlook.pt", "", "Falcao", "TiagovskiCoolXxX6969");
-
-        // Adding the User
-        Users users = new Users(userRestApiMethods);
-
+    public void testAddUser_MissingFirstName_MustReturnAnException() {
         // Asserting Answer
         assertThrows(Exception.class, () -> {
-            users.addUser(user);
+            new Users(new UsersStub()).addUser(new User("xX69FalcaoZinhoGamer69Xx@outlook.pt", "", "Falcao", "TiagovskiCoolXxX6969"));
         });
     }
 
     @Test
-    public void testAddUser_MissingLastNameUser_MustReturnAnException() {
-        // User Stub
-        UserRestApiMethods userRestApiMethods = new UsersStub();
-
-        // User that will be Added
-        User user = new User("xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "", "TiagovskiCoolXxX6969");
-
-        // Adding the User
-        Users users = new Users(userRestApiMethods);
-
+    public void testAddUser_MissingLastName_MustReturnAnException() {
         // Asserting Answer
         assertThrows(Exception.class, () -> {
-            users.addUser(user);
+            new Users(new UsersStub()).addUser(new User("xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "", "TiagovskiCoolXxX6969"));
         });
     }
 
     @Test
-    public void testAddUser_MissingAvatarUser_MustReturnAnException() {
-        // User Stub
-        UserRestApiMethods userRestApiMethods = new UsersStub();
-
-        // User that will be Added
-        User user = new User("xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "Falcao", "");
-
-        // Adding the User
-        Users users = new Users(userRestApiMethods);
-
+    public void testAddUser_MissingAvatar_MustReturnAnException() {
         // Asserting Answer
         assertThrows(Exception.class, () -> {
-            users.addUser(user);
+            new Users(new UsersStub()).addUser(new User("xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "Falcao", ""));
         });
     }
 
     @Test
-    public void testAddUser_Email50CharactersLengthUser_MustNotReturnAnException() {
-        // User Stub
-        UserRestApiMethods userRestApiMethods = new UsersStub();
-
-        // User that will be Added
-        User user = new User("xX69FalcaoZinhoXGamerFalcaoZinhoGamerXx@outlook.pt", "Diogo", "Falcao", "TiagovskiCoolXxX6969");
-
-        // Adding the User
-        Users users = new Users(userRestApiMethods);
-
+    public void testAddUser_EmailWith50CharactersLength_MustNotReturnAnException() {
         // Asserting Answer
         assertDoesNotThrow(() -> {
-            users.addUser(user);
+            new Users(new UsersStub()).addUser(new User("diogodiogodiogodiogodiogodiogodiogodiog@outlook.pt", "Diogo", "Falcao", "TiagovskiCoolXxX6969"));
         });
     }
 
     @Test
-    public void testAddUser_Email51CharactersLengthUser_MustReturnAnException() {
-        // User Stub
-        UserRestApiMethods userRestApiMethods = new UsersStub();
-
-        // User that will be Added
-        User user = new User("xX69FalcaoZinhoXXGamerFalcaoZinhoGamerXx@outlook.pt", "Diogo", "Falcao", "TiagovskiCoolXxX6969");
-
-        // Adding the User
-        Users users = new Users(userRestApiMethods);
-
+    public void testAddUser_EmailWith51CharactersLength_MustReturnAnException() {
         // Asserting Answer
         assertThrows(Exception.class, () -> {
-            users.addUser(user);
+            new Users(new UsersStub()).addUser(new User("diogodiogodiogodiogodiogodiogodiogodiogo@outlook.pt", "Diogo", "Falcao", "TiagovskiCoolXxX6969"));
         });
     }
 
     @Test
-    public void testAddUser_FirstName26CharactersLengthUser_MustReturnAnException() {
-        // User Stub
-        UserRestApiMethods userRestApiMethods = new UsersStub();
-
-        // User that will be Added
-        User user = new User("xxxx@outlook.pt", "DiogoDiogoDiogoDiogoDiogoD", "Falcao", "TiagovskiCoolXxX6969");
-
-        // Adding the User
-        Users users = new Users(userRestApiMethods);
-
+    public void testAddUser_FirstNameWith26CharactersLength_MustReturnAnException() {
         // Asserting Answer
         assertThrows(Exception.class, () -> {
-            users.addUser(user);
+            new Users(new UsersStub()).addUser(new User("xxxx@outlook.pt", "DiogoDiogoDiogoDiogoDiogoD", "Falcao", "TiagovskiCoolXxX6969"));
         });
     }
 
     @Test
-    public void testAddUser_FirstName25CharactersLengthUser_MustNotReturnAnException() {
-        // User Stub
-        UserRestApiMethods userRestApiMethods = new UsersStub();
-
-        // User that will be Added
-        User user = new User("xxxx@outlook.pt", "DiogoDiogoDiogoDiogoDiogo", "Falcao", "TiagovskiCoolXxX6969");
-
-        // Adding the User
-        Users users = new Users(userRestApiMethods);
-
+    public void testAddUser_FirstNameWith25CharactersLength_MustNotReturnAnException() {
         // Asserting Answer
         assertDoesNotThrow(() -> {
-            users.addUser(user);
+            new Users(new UsersStub()).addUser(new User("xxxx@outlook.pt", "DiogoDiogoDiogoDiogoDiogo", "Falcao", "TiagovskiCoolXxX6969"));
         });
     }
 
     @Test
-    public void testAddUser_LastName51CharactersLengthUser_MustReturnAnException() {
-        // User Stub
-        UserRestApiMethods userRestApiMethods = new UsersStub();
-
-        // User that will be Added
-        User user = new User("xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "FalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcao", "TiagovskiCoolXxX6969");
-
-        // Adding the User
-        Users users = new Users(userRestApiMethods);
-
+    public void testAddUser_LastNameWith51CharactersLength_MustReturnAnException() {
         // Asserting Answer
         assertThrows(Exception.class, () -> {
-            users.addUser(user);
+            new Users(new UsersStub()).addUser(new User("xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "DiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogo1", "TiagovskiCoolXxX6969"));
         });
     }
 
     @Test
-    public void testAddUser_LastName50CharactersLengthUser_MustReturnAnException() {
-        // User Stub
-        UserRestApiMethods userRestApiMethods = new UsersStub();
-
-        // User that will be Added
-        User user = new User("xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "FalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcao", "TiagovskiCoolXxX6969");
-
-        // Adding the User
-        Users users = new Users(userRestApiMethods);
-
+    public void testAddUser_LastNameWith50CharactersLength_MustNotReturnAnException() {
         // Asserting Answer
-        assertThrows(Exception.class, () -> {
-            users.addUser(user);
+        assertDoesNotThrow(() -> {
+            new Users(new UsersStub()).addUser(new User("xX69FdalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "DiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogo", "TiagovskiCoolXxX6969"));
         });
     }
 
     @Test
-    public void testAddUser_Avatar100CharactersLengthUser_MustNotReturnAnException() {
-        // User Stub
-        UserRestApiMethods userRestApiMethods = new UsersStub();
-
-        // User that will be Added
-        User user = new User("falcao@outlook.pt", "Diogo", "Falcao", "FalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcao");
-
-        // Adding the User
-        Users users = new Users(userRestApiMethods);
-
+    public void testAddUser_AvatarWith100CharactersLength_MustNotReturnAnException() {
         // Asserting Answer
-        assertThrows(Exception.class, () -> {
-            users.addUser(user);
+        assertDoesNotThrow(() -> {
+            new Users(new UsersStub()).addUser(new User("falcao@outlook.pt", "Diogo", "Falcao", "DiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogo"));
         });
     }
 
     @Test
-    public void testAddUser_Avatar101CharactersLengthUser_MustNotReturnAnException() {
-        // User Stub
-        UserRestApiMethods userRestApiMethods = new UsersStub();
-
-        // User that will be Added
-        User user = new User("falcao@outlook.pt", "Diogo", "Falcao", "XFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcaoFalcao");
-
-        // Adding the User
-        Users users = new Users(userRestApiMethods);
-
+    public void testAddUser_AvatarWith101CharactersLength_MustReturnAnException() {
         // Asserting Answer
         assertThrows(Exception.class, () -> {
-            users.addUser(user);
+            new Users(new UsersStub()).addUser(new User("falcao@outlook.pt", "Diogo", "Falcao", "DiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogo1"));
         });
     }
 
     @Test
     public void testAddUser_FirstNameMustContainOnlyLetters_MustReturnAnException() {
-        // User Stub
-        UserRestApiMethods userRestApiMethods = new UsersStub();
-
-        // User that will be Added
-        User user = new User("falcao@outlook.pt", "Diogo123123", "Falcao", "TiagovskiCoolXxX6969TiagovskiCoolXxX6969TiagovskiCoolXxX6969TiagovskiCoolXxX6969TiagovskiCoolXxX69691");
-
-        // Adding the User
-        Users users = new Users(userRestApiMethods);
-
         // Asserting Answer
         assertThrows(Exception.class, () -> {
-            users.addUser(user);
+            new Users(new UsersStub()).addUser(new User("falcao@outlook.pt", "Diogo123123", "Falcao", "TiagovskiCoolXxX6969TiagovskiCoolXxX6969TiagovskiCoolXxX6969TiagovskiCoolXxX6969TiagovskiCoolXxX69691"));
         });
     }
 
     @Test
     public void testAddUser_LastNameMustContainOnlyLetters_MustReturnAnException() {
-        // User Stub
-        UserRestApiMethods userRestApiMethods = new UsersStub();
-
-        // User that will be Added
-        User user = new User("falcao@outlook.pt", "Diogo", "Falca13123o", "TiagovskiCoolXxX6969TiagovskiCoolXxX6969TiagovskiCoolXxX6969TiagovskiCoolXxX6969TiagovskiCoolXxX69691");
-
-        // Adding the User
-        Users users = new Users(userRestApiMethods);
-
         // Asserting Answer
         assertThrows(Exception.class, () -> {
-            users.addUser(user);
+            new Users(new UsersStub()).addUser(new User("falcao@outlook.pt", "Diogo", "Falca13123o", "TiagovskiCoolXxX6969TiagovskiCoolXxX6969TiagovskiCoolXxX6969TiagovskiCoolXxX6969TiagovskiCoolXxX69691"));
         });
     }
 
     @Test
-    public void testShowUser_IdIsNull_MustReturnAnException() {
-        // User Stub
-        UserRestApiMethods userRestApiMethods = new UsersStub();
-
-        // Adding the User
-        Users users = new Users(userRestApiMethods);
-
-        // Asserting Answer
-        assertThrows(Exception.class, () -> {
-            users.showUser(null);
+    public void testAddUser_EmailIsNotEmpty_MustNotReturnAnException() {
+        assertDoesNotThrow(() -> {
+            new Users(new UsersStub()).addUser(new User("geordge.bluth@reqres.in", "Diogo", "Falcao", "TiagovskiCoolXxX6969"));
         });
     }
 
     @Test
-    public void testRemoveUser_IdIsNull_MustReturnAnException() {
-        // User Stub
-        UserRestApiMethods userRestApiMethods = new UsersStub();
-
-        // Adding the User
-        Users users = new Users(userRestApiMethods);
-
-        // Asserting Answer
-        assertThrows(Exception.class, () -> {
-            users.removeUser(null);
+    public void testAddUser_FirstNameIsNotEmpty_MustNotReturnAnException() {
+        assertDoesNotThrow(() -> {
+            new Users(new UsersStub()).addUser(new User("geordge.bluth@reqres.in", "Diodgo", "Falcao", "TiagovskiCoolXxX6969"));
         });
     }
+
+    @Test
+    public void testAddUser_LastNameIsNotEmpty_MustNotReturnAnException() {
+        assertDoesNotThrow(() -> {
+            new Users(new UsersStub()).addUser(new User("geordge.bluth@reqres.in", "Diodgo", "Faldcao", "TiagovskiCoolXxX6969"));
+        });
+    }
+
+    @Test
+    public void testAddUser_AvatarIsNotEmpty_MustNotReturnAnException() {
+        assertDoesNotThrow(() -> {
+            new Users(new UsersStub()).addUser(new User("geordge.bluth@reqres.in", "Diodgo", "Falcao", "TiagovdskiCoolXxX6969"));
+        });
+    }
+
+    @Test
+    public void testAddUser_EmailIsEmpty_MustReturnAnException() {
+        assertThrows(Exception.class, () -> {
+            new Users(new UsersStub()).addUser(new User("", "Diodgo", "Falcao", "TiagovskiCoolXxX6969"));
+        });
+    }
+
+    @Test
+    public void testAddUser_FirstNameIsEmpty_MustReturnAnException() {
+        assertThrows(Exception.class, () -> {
+            new Users(new UsersStub()).addUser(new User("geordge.bluth@reqres.in", "", "Falcao", "TiagovskiCoolXxX6969"));
+        });
+    }
+
+    @Test
+    public void testAddUser_LastNameIsEmpty_MustReturnAnException() {
+        assertThrows(Exception.class, () -> {
+            new Users(new UsersStub()).addUser(new User("geordge.bluth@reqres.in", "Diodgo", "", "TiagovskiCoolXxX6969"));
+        });
+    }
+
+    @Test
+    public void testAddUser_AvatarIsEmpty_MustReturnAnException() {
+        assertThrows(Exception.class, () -> {
+            new Users(new UsersStub()).addUser(new User("geordge.bluth@reqres.in", "Diodgo", "Falcao", ""));
+        });
+    }
+
 }

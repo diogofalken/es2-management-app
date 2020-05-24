@@ -6,7 +6,7 @@ import java.util.Collection;
 
 public interface UserRestApiMethods {
 
-    User postUser(User user);
+    User postUser(User user) throws Exception;
 
     Collection<User> getUsers();
 
