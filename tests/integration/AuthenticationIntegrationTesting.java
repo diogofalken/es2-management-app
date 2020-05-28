@@ -1,10 +1,8 @@
 package integration;
 
 import cache.Authentication;
-import interfaces.AuthenticationRestApiMethods;
 import middlewares.AuthenticationMiddleware;
 import org.junit.Test;
-import stubs.AuthenticationStub;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;

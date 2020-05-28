@@ -1,4 +1,4 @@
-package stubs;
+package mocks;
 
 import interfaces.UserRestApiMethods;
 import types.User;
@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @SuppressWarnings("unchecked")
-public class UsersStub implements UserRestApiMethods {
+public class UserMock implements UserRestApiMethods {
     private ArrayList<User> users = new ArrayList<User>();
 
-    public UsersStub() {
+    public UserMock() {
         this.defaultUsers();
     }
 

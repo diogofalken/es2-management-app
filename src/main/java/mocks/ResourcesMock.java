@@ -1,4 +1,4 @@
-package stubs;
+package mocks;
 
 import interfaces.ResourceRestApiMethods;
 import types.Resource;
@@ -6,11 +6,11 @@ import types.Resource;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class ResourcesStub implements ResourceRestApiMethods {
+public class ResourcesMock implements ResourceRestApiMethods {
 
     private ArrayList<Resource> resources = new ArrayList<Resource>();
 
-    public ResourcesStub() {
+    public ResourcesMock() {
         this.defaultResources();
     }
 

@@ -1,10 +1,8 @@
 package integration;
 
 import cache.Users;
-import interfaces.UserRestApiMethods;
 import middlewares.UsersMiddleware;
 import org.junit.Test;
-import stubs.UsersStub;
 import types.User;
 
 import static org.junit.jupiter.api.Assertions.*;

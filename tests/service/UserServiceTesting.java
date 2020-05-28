@@ -15,6 +15,7 @@ import java.net.URL;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UserServiceTesting {
+
     @Test
     public void testAddUser_CorrectUser_StatusMustBe201() {
         User user = new User("xxxdiogofalcaogamerpt69xxx@yahoo.com.br", "Diogo", "Falcão", "A21");
@@ -123,6 +124,7 @@ public class UserServiceTesting {
             outputStream.write(userJsonString.getBytes("UTF-8"));
             outputStream.close();
 
+            assertEquals(201, connection.getResponseCode());
             assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
 
             connection.disconnect();
@@ -178,6 +180,9 @@ public class UserServiceTesting {
 
             // Closing the buffer
             br.close();
+
+            assertEquals(201, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
 
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
@@ -244,6 +249,7 @@ public class UserServiceTesting {
             connection.setRequestProperty("Accept", "application/json");
             connection.setRequestProperty("Content-Type", "application/json");
 
+            assertEquals(200, connection.getResponseCode());
             assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
 
             connection.disconnect();
@@ -280,6 +286,9 @@ public class UserServiceTesting {
 
             // Closing the buffer
             br.close();
+
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
 
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
@@ -329,6 +338,9 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONArray data = (JSONArray) jsonOutput.get("data");
@@ -376,6 +388,9 @@ public class UserServiceTesting {
 
             // Closing the buffer
             br.close();
+
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
 
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
@@ -425,6 +440,9 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONArray data = (JSONArray) jsonOutput.get("data");
@@ -472,6 +490,9 @@ public class UserServiceTesting {
 
             // Closing the buffer
             br.close();
+
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
 
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
@@ -522,6 +543,9 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONArray data = (JSONArray) jsonOutput.get("data");
@@ -570,6 +594,9 @@ public class UserServiceTesting {
 
             // Closing the buffer
             br.close();
+
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
 
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
@@ -620,6 +647,9 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONArray data = (JSONArray) jsonOutput.get("data");
@@ -668,6 +698,9 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONArray data = (JSONArray) jsonOutput.get("data");
@@ -715,6 +748,9 @@ public class UserServiceTesting {
 
             // Closing the buffer
             br.close();
+
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
 
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
@@ -765,6 +801,9 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONArray data = (JSONArray) jsonOutput.get("data");
@@ -813,6 +852,9 @@ public class UserServiceTesting {
 
             // Closing the buffer
             br.close();
+
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
 
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
@@ -863,6 +905,9 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONArray data = (JSONArray) jsonOutput.get("data");
@@ -911,6 +956,9 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONArray data = (JSONArray) jsonOutput.get("data");
@@ -958,6 +1006,9 @@ public class UserServiceTesting {
 
             // Closing the buffer
             br.close();
+
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
 
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
@@ -1008,6 +1059,9 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONArray data = (JSONArray) jsonOutput.get("data");
@@ -1056,6 +1110,9 @@ public class UserServiceTesting {
 
             // Closing the buffer
             br.close();
+
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
 
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
@@ -1106,6 +1163,9 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONArray data = (JSONArray) jsonOutput.get("data");
@@ -1154,6 +1214,9 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONArray data = (JSONArray) jsonOutput.get("data");
@@ -1201,6 +1264,9 @@ public class UserServiceTesting {
 
             // Closing the buffer
             br.close();
+
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
 
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
@@ -1251,6 +1317,9 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONArray data = (JSONArray) jsonOutput.get("data");
@@ -1300,6 +1369,9 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONArray data = (JSONArray) jsonOutput.get("data");
@@ -1341,7 +1413,7 @@ public class UserServiceTesting {
     }
 
     @Test
-    public void testListUser_SingleUser_StatusMustBe404() {
+    public void testListUser_ValidSingleUser_StatusMustBe404() {
         try {
             // Creation URL Connection
             URL url = new URL("https://reqres.in/api/users/1000");
@@ -1361,7 +1433,7 @@ public class UserServiceTesting {
     }
 
     @Test
-    public void testListUser_SingleUser_ContentTypeMustBeJsonString() {
+    public void testListUser_InvalidSingleUser_ContentTypeMustBeJsonString() {
         try {
             // Creation URL Connection
             URL url = new URL("https://reqres.in/api/users/1");
@@ -1372,6 +1444,7 @@ public class UserServiceTesting {
             connection.setRequestProperty("Accept", "application/json");
             connection.setRequestProperty("Content-Type", "application/json");
 
+            assertEquals(200, connection.getResponseCode());
             assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
 
             connection.disconnect();
@@ -1408,6 +1481,9 @@ public class UserServiceTesting {
 
             // Closing the buffer
             br.close();
+
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
 
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
@@ -1454,6 +1530,9 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONObject data = (JSONObject)  jsonOutput.get("data");
@@ -1498,6 +1577,9 @@ public class UserServiceTesting {
 
             // Closing the buffer
             br.close();
+
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
 
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
@@ -1544,6 +1626,9 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONObject data = (JSONObject) jsonOutput.get("data");
@@ -1588,6 +1673,9 @@ public class UserServiceTesting {
 
             // Closing the buffer
             br.close();
+
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
 
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
@@ -1635,6 +1723,9 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONObject data = (JSONObject) jsonOutput.get("data");
@@ -1680,6 +1771,9 @@ public class UserServiceTesting {
 
             // Closing the buffer
             br.close();
+
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
 
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
@@ -1727,6 +1821,9 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONObject data = (JSONObject) jsonOutput.get("data");
@@ -1772,6 +1869,9 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONObject data = (JSONObject) jsonOutput.get("data");
@@ -1816,6 +1916,9 @@ public class UserServiceTesting {
 
             // Closing the buffer
             br.close();
+
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
 
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
@@ -1863,6 +1966,9 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONObject data = (JSONObject) jsonOutput.get("data");
@@ -1908,6 +2014,9 @@ public class UserServiceTesting {
 
             // Closing the buffer
             br.close();
+
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
 
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
@@ -1955,6 +2064,9 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONObject data = (JSONObject) jsonOutput.get("data");
@@ -1999,6 +2111,9 @@ public class UserServiceTesting {
 
             // Closing the buffer
             br.close();
+
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
 
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
@@ -2045,6 +2160,9 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONObject data = (JSONObject) jsonOutput.get("data");
@@ -2090,6 +2208,9 @@ public class UserServiceTesting {
 
             // Closing the buffer
             br.close();
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
 
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
@@ -2137,6 +2258,12 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONObject data = (JSONObject) jsonOutput.get("data");
@@ -2183,6 +2310,12 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONObject data = (JSONObject) jsonOutput.get("data");
@@ -2228,6 +2361,12 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONObject data = (JSONObject) jsonOutput.get("data");
@@ -2272,6 +2411,9 @@ public class UserServiceTesting {
 
             // Closing the buffer
             br.close();
+
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
 
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
@@ -2319,6 +2461,9 @@ public class UserServiceTesting {
             // Closing the buffer
             br.close();
 
+            assertEquals(200, connection.getResponseCode());
+            assertEquals("application/json; charset=utf-8", connection.getHeaderField("content-type"));
+
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonOutput = (JSONObject) jsonParser.parse(result.toString());
             JSONObject data = (JSONObject) jsonOutput.get("data");
@@ -2357,7 +2502,7 @@ public class UserServiceTesting {
     }
 
     @Test
-    public void testDeleteUser_InvalidUser_StatusMustNotBe200() {
+    public void testDeleteUser_InvalidUser_StatusMustNotBe404() {
         try {
             // Creation URL Connection
             URL url = new URL("https://reqres.in/api/users/10000");
@@ -2368,7 +2513,7 @@ public class UserServiceTesting {
             connection.setRequestProperty("Accept", "application/json");
             connection.setRequestProperty("Content-Type", "application/json");
 
-            assertNotEquals(200, connection.getResponseCode());
+            assertNotEquals(404, connection.getResponseCode());
 
             connection.disconnect();
         } catch (Exception e) {

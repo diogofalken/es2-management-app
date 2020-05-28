@@ -1,17 +1,17 @@
-package stubs;
+package mocks;
 
 import interfaces.AuthenticationRestApiMethods;
 import types.Account;
 
 import java.util.HashMap;
 
-public class AuthenticationStub implements AuthenticationRestApiMethods {
+public class AuthenticationMock implements AuthenticationRestApiMethods {
 
     // fields
     private HashMap<Integer, Account> registeredAccount = new HashMap<Integer, Account>();
     private HashMap<Integer, Account> authenticatedAccount = new HashMap<Integer, Account>();
 
-    public AuthenticationStub() {
+    public AuthenticationMock() {
         this.defaultRegisteredUsers();
         this.defaultAuthenticateUsers();
     }
