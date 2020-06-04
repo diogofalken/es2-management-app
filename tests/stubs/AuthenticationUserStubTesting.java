@@ -1,13 +1,12 @@
-package mocks;
+package stubs;
 
 import cache.Authentication;
-import interfaces.AuthenticationRestApiMethods;
 import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class AuthenticationUserMockTesting {
+public class AuthenticationUserStubTesting {
 
     // Testing Register Account
 
@@ -15,7 +14,7 @@ public class AuthenticationUserMockTesting {
     public void testRegisterAccount_CorrectEmailAndPassword_MustNotReturnAnException() {
         assertDoesNotThrow(() -> {
             // Register
-            new Authentication(new AuthenticationMock()).registerAccount("diogoxd97@hotmail.com", "A12S");
+            new Authentication(new AuthenticationStub()).registerAccount("diogoxd97@hotmail.com", "A12S");
         });
     }
 
@@ -23,7 +22,7 @@ public class AuthenticationUserMockTesting {
     public void testRegisterAccount_MissingEmail_MustReturnAnException() {
         assertThrows(Exception.class, () -> {
             // Register
-            new Authentication(new AuthenticationMock()).registerAccount("", "A12S");
+            new Authentication(new AuthenticationStub()).registerAccount("", "A12S");
         });
     }
 
@@ -31,7 +30,7 @@ public class AuthenticationUserMockTesting {
     public void testRegisterAccount_MissingPassword_MustReturnAnException() {
         assertThrows(Exception.class, () -> {
             // Register
-            new Authentication(new AuthenticationMock()).registerAccount("diogo@hotmail.com", "");
+            new Authentication(new AuthenticationStub()).registerAccount("diogo@hotmail.com", "");
         });
     }
 
@@ -41,7 +40,7 @@ public class AuthenticationUserMockTesting {
     public void testAuthenticateAccount_CorrectEmailAndPassword_MustNotReturnAnException() {
         assertDoesNotThrow(() -> {
             // Register
-            new Authentication(new AuthenticationMock()).authenticateAccount("didogo@hotmail.com", "A12S");
+            new Authentication(new AuthenticationStub()).authenticateAccount("didogo@hotmail.com", "A12S");
         });
     }
 
@@ -49,7 +48,7 @@ public class AuthenticationUserMockTesting {
     public void testAuthenticateAccount_MissingEmail_MustReturnAnException() {
         assertThrows(Exception.class, () -> {
             // Register
-            new Authentication(new AuthenticationMock()).authenticateAccount("", "A12S");
+            new Authentication(new AuthenticationStub()).authenticateAccount("", "A12S");
         });
     }
 
@@ -57,7 +56,7 @@ public class AuthenticationUserMockTesting {
     public void testAuthenticateAccount_MissingPassword_MustReturnAnException() {
         assertThrows(Exception.class, () -> {
             // Register
-            new Authentication(new AuthenticationMock()).authenticateAccount("diogo@hotmail.com", "");
+            new Authentication(new AuthenticationStub()).authenticateAccount("diogo@hotmail.com", "");
         });
     }
 }

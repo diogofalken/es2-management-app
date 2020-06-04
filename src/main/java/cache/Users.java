@@ -90,7 +90,7 @@ public class Users {
             throw new IOException("Id Missing");
 
         boolean responseUser = this.userRestApiMethods.deleteUser(id);
-
+        
         if (responseUser == false)
             throw new Exception("User with that Id was not found");
 
