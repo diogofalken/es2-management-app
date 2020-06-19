@@ -69,7 +69,6 @@ public class UserStub implements UserRestApiMethods {
         return null;
     }
 
-
     @Override
     public boolean deleteUser(Integer id) {
         ArrayList<User> users = new ArrayList<User>();

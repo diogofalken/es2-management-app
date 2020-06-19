@@ -89,6 +89,14 @@ public class UserStubTesting {
     }
 
     @Test
+    public void testRemoveUser_UserRemoved_MustReturnTrue() {
+        // Asserting Answer
+        assertDoesNotThrow(() -> {
+            new Users(new UserStub()).removeUser(1);
+        });
+    }
+
+    @Test
     public void testRemoveUser_IdIsNull_MustReturnAnException() {
         // Asserting Answer
         assertThrows(Exception.class, () -> {

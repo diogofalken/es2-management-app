@@ -25,7 +25,6 @@ public class Authentication {
     // login a user
     public void authenticateAccount(String email, String password) throws Exception {
         Account account = new Account(email, password);
-
         this.authenticationRestApiMethods.postLogin(account);
     }
 }
