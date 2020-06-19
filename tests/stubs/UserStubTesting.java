@@ -180,7 +180,7 @@ public class UserStubTesting {
     public void testAddUser_LastNameWith51CharactersLength_MustReturnAnException() {
         // Asserting Answer
         assertThrows(Exception.class, () -> {
-            new Users(new UserStub()).addUser(new User("xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "DiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogo1", "TiagovskiCoolXxX6969"));
+            new Users(new UserStub()).addUser(new User("xX69FalcaoZinhoGamer69Xx@outlook.pt", "Diogo", "DiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogoDiogod", "TiagovskiCoolXxX6969"));
         });
     }
 
