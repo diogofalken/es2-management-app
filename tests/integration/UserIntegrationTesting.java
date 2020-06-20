@@ -199,34 +199,6 @@ public class UserIntegrationTesting {
     }
 
     @Test
-    public void testAddUser_EmailIsEmpty_MustReturnAnException() {
-        assertThrows(Exception.class, () -> {
-            new Users(new UsersMiddleware()).addUser(new User("", "Diodgo", "Falcao", "TiagovskiCoolXxX6969"));
-        });
-    }
-
-    @Test
-    public void testAddUser_FirstNameIsEmpty_MustReturnAnException() {
-        assertThrows(Exception.class, () -> {
-            new Users(new UsersMiddleware()).addUser(new User("geordge.bluth@reqres.in", "", "Falcao", "TiagovskiCoolXxX6969"));
-        });
-    }
-
-    @Test
-    public void testAddUser_LastNameIsEmpty_MustReturnAnException() {
-        assertThrows(Exception.class, () -> {
-            new Users(new UsersMiddleware()).addUser(new User("geordge.bluth@reqres.in", "Diodgo", "", "TiagovskiCoolXxX6969"));
-        });
-    }
-
-    @Test
-    public void testAddUser_AvatarIsEmpty_MustReturnAnException() {
-        assertThrows(Exception.class, () -> {
-            new Users(new UsersMiddleware()).addUser(new User("geordge.bluth@reqres.in", "Diodgo", "Falcao", ""));
-        });
-    }
-
-    @Test
     public void testRemoveUser_IdIsNull_MustReturnAnException() {
         // Asserting Answer
         assertThrows(Exception.class, () -> {
