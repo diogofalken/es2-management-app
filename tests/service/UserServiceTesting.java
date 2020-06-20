@@ -1413,7 +1413,7 @@ public class UserServiceTesting {
     }
 
     @Test
-    public void testListUser_ValidSingleUser_StatusMustBe404() {
+    public void testListUser_InvalidSingleUser_StatusMustBe404() {
         try {
             // Creation URL Connection
             URL url = new URL("https://reqres.in/api/users/1000");
@@ -1433,7 +1433,7 @@ public class UserServiceTesting {
     }
 
     @Test
-    public void testListUser_InvalidSingleUser_ContentTypeMustBeJsonString() {
+    public void testListUser_ValidSingleUser_ContentTypeMustBeJsonString() {
         try {
             // Creation URL Connection
             URL url = new URL("https://reqres.in/api/users/1");
