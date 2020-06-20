@@ -243,6 +243,14 @@ public class UserIntegrationTesting {
     }
 
     @Test
+    public void testRemoveUser_UserRemoved_MustNotReturnAnException() {
+        // Asserting Answer
+        assertDoesNotThrow(() -> {
+            new Users(new UsersMiddleware()).removeUser(1);
+        });
+    }
+
+    @Test
     public void testShowUser_IdIsNull_MustReturnAnException() {
         // Asserting Answer
         assertThrows(Exception.class, () -> {
@@ -289,7 +297,7 @@ public class UserIntegrationTesting {
     }
 
     @Test
-    public void testShowUser_UserNotFound_MustReturnAnException()  {
+    public void testShowUser_UserNotFound_MustReturnAnException()   {
         // Asserting Answer
         assertThrows(Exception.class, () -> {
             new Users(new UsersMiddleware()).showUser(100);

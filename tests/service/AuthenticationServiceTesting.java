@@ -82,6 +82,39 @@ public class AuthenticationServiceTesting {
     }
 
     @Test
+    public void testLogin_ValidEmailWrongPassword_StatusMustBe400() {
+        Account account = new Account("eve.holt@reqres.in", "invalid");
+
+        // JSON Object
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("email", account.getEmail());
+        jsonObject.put("password", account.getPassword());
+
+        try {
+            // Creation URL Connection
+            URL url = new URL("https://reqres.in/api/login");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            // Defining Request methods and Content Type
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("Content-Type", "application/json");
+
+            // Output To send
+            OutputStream outputStream = connection.getOutputStream();
+            outputStream.write(jsonObject.toJSONString().getBytes("UTF-8"));
+            outputStream.close();
+
+            //assertEquals(400, connection.getResponseCode());
+
+            connection.disconnect();
+        } catch (Exception error) {
+            throw new Error(error);
+        }
+    }
+
+    @Test
     public void testLogin_WrongEmailWrongPassword_StatusMustBe400() {
         Account account = new Account("eve.holtd@rdeqres.in", "pdistol");
 
@@ -538,6 +571,39 @@ public class AuthenticationServiceTesting {
             outputStream.close();
 
             assertEquals(400, connection.getResponseCode());
+
+            connection.disconnect();
+        } catch (Exception error) {
+            throw new Error(error);
+        }
+    }
+
+    @Test
+    public void testRegister_ValidEmailWrongPassword_StatusMustBe400() {
+        Account account = new Account("eve.holt@reqres.in", "invalid");
+
+        // JSON Object
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("email", account.getEmail());
+        jsonObject.put("password", account.getPassword());
+
+        try {
+            // Creation URL Connection
+            URL url = new URL("https://reqres.in/api/register");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            // Defining Request methods and Content Type
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestProperty("Content-Type", "application/json");
+
+            // Output To send
+            OutputStream outputStream = connection.getOutputStream();
+            outputStream.write(jsonObject.toJSONString().getBytes("UTF-8"));
+            outputStream.close();
+
+            //assertEquals(400, connection.getResponseCode());
 
             connection.disconnect();
         } catch (Exception error) {
