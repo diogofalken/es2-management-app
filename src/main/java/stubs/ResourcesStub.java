@@ -1,34 +1,42 @@
 package stubs;
 
-import interfaces.ResourceRestApiMethods;
+import interfaces.ResourcesInterface;
 import types.Resource;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
-public class ResourcesStub implements ResourceRestApiMethods {
-    public ResourcesStub() {}
+public class ResourcesStub implements ResourcesInterface {
 
     @Override
-    public Collection<Resource> getResources() {
-        final Resource resource1 = new Resource(1, "Apple", 1997, "Yellow", "lol123");
-        final Resource resource2 = new Resource(2, "Orange", 1997, "Yellow", "lol123");
-
+    public ArrayList<Resource> getResources() {
+        // Creating ArrayList
         final ArrayList<Resource> resources = new ArrayList<Resource>();
 
-        resources.add(resource1);
-        resources.add(resource2);
+        // Creating Resources
+        final Resource resource0 = new Resource(1, "Apple", 1997, "Yellow", "00-0001");
+        final Resource resource1 = new Resource(2, "Orange", 1997, "Yellow", "00-0002");
 
-        return resources.size() > 0 ? resources : null;
+        // Adding Resource
+        resources.add(resource0);
+        resources.add(resource1);
+
+        // Checking Resources Size
+        if (resources.size() == 0) {
+            return null;
+        }
+
+        return resources;
     }
 
     @Override
     public Resource getResource(Integer id) {
-        Resource resource = new Resource(1, "Apple", 1997, "Yellow", "lol123");
+        // Creating Resource
+        Resource resource = new Resource(1, "Apple", 1997, "Yellow", "00-0001");
 
-        if (resource.getId() == id)
-            return resource;
+        if (resource.getId() != id) {
+            return null;
+        }
 
-        return null;
+        return resource;
     }
 }

@@ -1,14 +1,13 @@
 package types;
 
 public class User {
-
     private Integer id;
     private final String email;
     private final String firstName;
     private final String lastName;
     private final String avatar;
 
-    public User(final String email, final String firstName, final String lastName, final String avatar) {
+    public User(String email, String firstName, String lastName, String avatar) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -17,6 +16,10 @@ public class User {
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -34,10 +37,4 @@ public class User {
     public String getAvatar() {
         return avatar;
     }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-
 }
