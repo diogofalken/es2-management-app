@@ -48,7 +48,7 @@ public class Accounts {
             throw new Exception("Email length must be lower than 15!");
         }
 
-        if ((account.getPassword() instanceof String) == true) {
+        if ((account.getPassword() instanceof String) == false) {
             throw new Exception("Password must be a String!");
         }
 
@@ -96,7 +96,7 @@ public class Accounts {
             throw new Exception("Email length must be lower than 15!");
         }
 
-        if ((account.getPassword() instanceof String) == true) {
+        if ((account.getPassword() instanceof String) == false) {
             throw new Exception("Password must be a String!");
         }
 
