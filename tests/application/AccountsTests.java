@@ -393,7 +393,7 @@ public class AccountsTests {
     }
 
     @Test
-    public void ttestRegisterAccount_EmailDoesNotContainEmailServiceInvalidPassword_MustReturnAnException() {
+    public void testRegisterAccount_EmailDoesNotContainEmailServiceInvalidPassword_MustReturnAnException() {
         Account account = new Account("FirstUser@hotmail.com", "InvalidPassword");
 
         assertThrows(Exception.class, () -> {
@@ -482,7 +482,7 @@ public class AccountsTests {
 
         assertTrue(new Accounts(new AccountsStub()).registerAccount(account));
     }
-    
+
     @Test
     public void testRegisterAccount_CorrectEmailPasswordDoesNotMatchCorrectCharacters_MustReturnAnException() {
         Account account = new Account("FirstUser@gmail.com", "Firs.tUser");

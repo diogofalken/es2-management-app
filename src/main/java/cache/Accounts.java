@@ -29,7 +29,7 @@ public class Accounts {
         }
 
         if ((account.getEmail().matches("(.*)[$&+,:;=?#|](.*)")) == true) {
-            throw new Exception("Email must only contain numbers, letters and @gmail.com!");
+            throw new Exception("Email must not contain invalid characters!");
         }
 
         if ((account.getEmail().contains("@gmail.com")) == false) {
@@ -53,7 +53,7 @@ public class Accounts {
         }
 
         if ((account.getPassword().matches("(.*)[$&+,:;=?@#|.](.*)")) == true) {
-            throw new Exception("Password must only contain numbers and letters!");
+            throw new Exception("Password must not contain invalid characters!");
         }
 
         return this.accountsInterface.authenticateAccount(account);

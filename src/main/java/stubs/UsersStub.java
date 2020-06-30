@@ -36,7 +36,7 @@ public class UsersStub implements UsersInterface {
 
         user.setId(users.size() + 1);
 
-        return users.add(user);
+        return users.add(user) ? true : false;
     }
 
     @Override
